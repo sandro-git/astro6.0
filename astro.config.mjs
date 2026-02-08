@@ -4,6 +4,14 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: cloudflare({ imageService: 'compile' }),
+  adapter: cloudflare(),
   output: 'server',
+  image: {
+    service: { entrypoint: 'astro/assets/services/noop' },
+  },
+  vite: {
+    ssr: {
+      external: ['sharp'],
+    },
+  },
 });
